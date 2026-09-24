@@ -21,6 +21,47 @@ estructuraDinamica::estructuraDinamica( )
 	final = NULL;
 }
 
+estructuraDinamica::estructuraDinamica(const estructuraDinamica &e){
+	if (e.final == nullptr) {
+    	final = nullptr;
+	}
+    else {
+        node *inici = e.final->seguent;
+        node *p = new node;
+        p->dada = inici->dada;
+        node *nouInici = p;
+        node *actual = inici->seguent;
+
+		while (actual != inici) {
+
+            node *nou = new node;
+            nou->dada = actual->dada;
+            p->seguent = nou;
+            p = nou;
+            actual = actual->seguent;
+        }
+
+        p->seguent = nouInici;
+        final = p;
+    }
+}
+
+estructuraDinamica::~estructuraDinamica() {
+    if (final != nullptr) {
+        node *primero = final->seguent;
+        node *p = primero;
+
+        while (p != final) {
+            node *aux = p;
+            p = p->seguent;
+            delete aux;
+        }
+
+        delete final;
+        final = nullptr;
+    }
+}
+
 void estructuraDinamica::AfegirInici(int i){
 	node * p = new node;
 	p->dada = i;
