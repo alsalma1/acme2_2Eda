@@ -21,7 +21,20 @@ estructuraDinamica::estructuraDinamica( )
 	final = NULL;
 }
 
+void estructuraDinamica::AfegirInici(int i){
+	node * p = new node;
+	p->dada = i;
 
+	if(final == nullptr){
+		p->seguent = p;
+		final = p;
+		final = p = final->seguent;
+	}
+	else{
+		p->seguent = final -> seguent;
+		final -> seguent = p;
+	}
+}
 
 void estructuraDinamica::Llistar() const
 {
